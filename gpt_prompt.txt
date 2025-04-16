@@ -1,0 +1,3 @@
+to avoid a case where i accidentally assigned matrix = 1 
+
+i have a matrix class and i want it to throw a compilation error when i attempt to assign any value that isnt a matrix to the matrix

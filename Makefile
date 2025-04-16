@@ -3,12 +3,13 @@ CXX=clang++
 CXXFLAGS=-Wall -Werror -std=c++2a 
 
 # object files for the data structures
-OBJS_DS = matrix.o
+OBJS_DS = matrix.o generalHelpers.o
 
 MAIN_OBJ = main.o $(OBJS)
 
 # object files for the test files
-TEST_OBJ = NULL
+TEST_OBJ = tests/test.o matrix.o generalHelpers.o tests/testGeneralMatrixFunctions.o tests/testArithmeticOperations.o \
+	tests/testIncrAndDecrOperations.o tests/testComparisonOperations.o tests/testCompoundOperations.o
 
 # valgrind flags, taken from course site, folder 02-classes-constructors-destructors: the makefile in the valgrind folder
 VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all --error-exitcode=99 
@@ -33,6 +34,6 @@ valgrind-test: test
 	valgrind $(VALGRIND_FLAGS) ./test
 
 clean:
-	rm -f *.o Tests/*.o Main test
+	rm -f *.o tests/*.o Main test
 
 .PHONY: clean 
