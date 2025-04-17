@@ -5,10 +5,10 @@ CXXFLAGS=-Wall -Werror -std=c++2a
 # object files for the data structures
 OBJS_DS = matrix.o generalHelpers.o
 
-MAIN_OBJ = main.o $(OBJS)
+MAIN_OBJ = main.o $(OBJS_DS)
 
 # object files for the test files
-TEST_OBJ = tests/test.o matrix.o generalHelpers.o tests/testGeneralMatrixFunctions.o tests/testArithmeticOperations.o \
+TEST_OBJ = tests/test.o $(OBJS_DS) tests/testGeneralMatrixFunctions.o tests/testArithmeticOperations.o \
 	tests/testIncrAndDecrOperations.o tests/testComparisonOperations.o tests/testCompoundOperations.o
 
 # valgrind flags, taken from course site, folder 02-classes-constructors-destructors: the makefile in the valgrind folder

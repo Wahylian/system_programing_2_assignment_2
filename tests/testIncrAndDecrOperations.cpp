@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "../matrix.hpp"
+using namespace Matrix;
 
 TEST_CASE("Test Prefix Increment"){
     SquareMat mat = SquareMat(3);

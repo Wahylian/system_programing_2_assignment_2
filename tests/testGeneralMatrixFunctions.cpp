@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "../matrix.hpp"
+using namespace Matrix;
 
 TEST_CASE("Test Constructors"){
     SUBCASE("Constructor"){
@@ -132,6 +133,75 @@ TEST_CASE("Test Accessing values in the matrix"){
     }
 }
 
+TEST_CASE("Test Negative Matrix"){
+    SUBCASE("Matrix of Positive Values"){
+        SquareMat mat = SquareMat(3);
+        SquareMat expected = SquareMat(3);
+        // sets values of the matrices
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++){
+                int num = 3*i +j +1;
+                mat[i][j] = num;
+                expected[i][j] = -num;
+            }
+        // gets the negative matrix
+        SquareMat minusMat = -mat;
+        // checks that the values are the expected values
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(minusMat[i][j] == expected[i][j]);
+
+        // checks that the original wasn't changed
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(mat[i][j] == -expected[i][j]);
+    }
+    SUBCASE("Matrix of Negative Values"){
+        SquareMat mat = SquareMat(3);
+        SquareMat expected = SquareMat(3);
+        // sets values of the matrices
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++){
+                int num = 3*i +j +1;
+                mat[i][j] = -num;
+                expected[i][j] = num;
+            }
+        // gets the negative matrix
+        SquareMat minusMat = -mat;
+        // checks that the values are the expected values
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(minusMat[i][j] == expected[i][j]); 
+
+        // checks that the original wasn't changed
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(mat[i][j] == -expected[i][j]);    
+    }
+    SUBCASE("Mixed Values Matrix"){
+        SquareMat mat = SquareMat(3);
+        SquareMat expected = SquareMat(3);
+        // sets values of the matrices
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++){
+                int num = 3*i +j +1;
+                mat[i][j] = power(-1, i)*num;
+                expected[i][j] = -power(-1, i)*num;
+            }
+        // gets the negative matrix
+        SquareMat minusMat = -mat;
+        // checks that the values are the expected values
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(minusMat[i][j] == expected[i][j]);
+
+        // checks that the original wasn't changed
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(mat[i][j] == -expected[i][j]);
+    }
+}
+
 TEST_CASE("Test Transpose"){
     SUBCASE("Positive Size"){
         SquareMat mat = SquareMat(3);
@@ -151,14 +221,19 @@ TEST_CASE("Test Transpose"){
         }
     
         // transposes mat
-        ~mat;
+        SquareMat transposed = ~mat;
     
         // checks that all the values in mat and tam are the same
         for(int i=0; i<mat.size(); i++){
             for(int j=0; j<mat.size(); j++){
-                CHECK(mat[i][j] == tam[i][j]);
+                CHECK(transposed[i][j] == tam[i][j]);
             }
         }
+        
+        // checks that the original wasn't changed
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(mat[i][j] == tam[j][i]); 
     }
     SUBCASE("Size 0"){
         SquareMat mat = SquareMat(0);
@@ -178,14 +253,19 @@ TEST_CASE("Test Transpose"){
         }
     
         // transposes mat
-        ~mat;
+        SquareMat transposed = ~mat;
     
         // checks that all the values in mat and tam are the same
         for(int i=0; i<mat.size(); i++){
             for(int j=0; j<mat.size(); j++){
-                CHECK(mat[i][j] == tam[i][j]);
+                CHECK(transposed[i][j] == tam[i][j]);
             }
         }
+
+        // checks that the original wasn't changed
+        for(int i=0; i<mat.size(); i++)
+            for(int j=0; j<mat.size(); j++)
+                CHECK(mat[i][j] == tam[j][i]); 
     }
 }
 

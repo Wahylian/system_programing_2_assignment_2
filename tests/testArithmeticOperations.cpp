@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "../matrix.hpp"
+using namespace Matrix;
 
 TEST_CASE("Test Addition"){
     SUBCASE("Test Valid Addition"){
