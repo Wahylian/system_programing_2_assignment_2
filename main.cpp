@@ -38,7 +38,6 @@ int main(){
     std::cout<<"mat2-mat4="<<std::endl<<mat2-mat4<<std::endl;
     // turning the values of a matrix
     std::cout<<"-mat4"<<std::endl<<-mat4<<std::endl;
-    std::cout<<"--mat4 (returning to orignal matrix)"<<std::endl<<mat4<<std::endl;
     // multiplying matrices
     std::cout<<"mat1*mat5="<<std::endl<<mat1*mat5<<std::endl;
     // multiplying matrix by scalar
