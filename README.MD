@@ -17,6 +17,7 @@
     * Determinant Unary Operator
     * Compound Arithmetic Operations on Matrices
     * An output Operator
+    * An Assignment Operator
 2. **A [Tests](Tests) folder** which runs tests on the operators of the Matrix.
 3. **A [MAKEFILE](Makefile)** allowing to run the following commands: <br/>
     * **make Main** <br/>

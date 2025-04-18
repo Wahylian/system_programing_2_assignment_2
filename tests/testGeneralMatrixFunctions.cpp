@@ -82,6 +82,44 @@ TEST_CASE("Test Constructors"){
     }
 }
 
+TEST_CASE("Test Assignment Operator"){
+    SUBCASE("Legal Assignment"){
+        // creates an original matrix
+        SquareMat original = SquareMat(3);
+        // sets it's values
+        for(int i=0; i<original.size(); i++)
+            for(int j=0; j<original.size(); j++)
+                original[i][j] = 3*i+j+1;
+        
+        // copies the matrix over
+        SquareMat copy = original;
+        
+        // checks that the address of copy is different than the original
+        CHECK(&copy != &original);
+
+        // checks that the values in copy and original are the same
+        for(int i=0; i<original.size(); i++)
+            for(int j=0; j<original.size(); j++)
+                CHECK(copy[i][j] == original[i][j]);
+        
+        // checks that changing copy doesn't change the original
+        for(int i=0; i<copy.size(); i++)
+            for(int j=0; j<copy.size(); j++)
+                copy[i][j] = 1;
+        
+        for(int i=0; i<original.size(); i++)
+            for(int j=0; j<original.size(); j++)
+                CHECK(original[i][j] == 3*i+j+1);
+    }
+    SUBCASE("Illegal Assignment"){
+        // since any illegal assignment will cause a compilation error
+        // they will be marked as comments
+
+        //SquareMat mat=5;
+        //SquareMat mat = "matrix";
+    }
+}
+
 TEST_CASE("Test Accessing values in the matrix"){
     SUBCASE("Inserting a Value"){
         // create a matrix of size 3x3
@@ -123,10 +161,6 @@ TEST_CASE("Test Accessing values in the matrix"){
         for(int i=0; i<constMat.size(); i++){
             for(int j=0; j<constMat.size(); j++){
                 CHECK(constMat[i][j] == 3*i+j+1); // check that the values are correct
-                // as this throws a compilation error
-                // the attempt to change the value at [i][j] will be written as a comment
-                // constMat[i][j] = 42;
-                // this shows that the value is not changeable
             }
         }
 
